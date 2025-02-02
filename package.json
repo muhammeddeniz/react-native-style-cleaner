@@ -1,6 +1,6 @@
 {
   "name": "react-native-style-cleaner",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React Native projelerinde kullanılmayan stilleri tespit eden ve temizleyen araç",
   "main": "src/index.js",
   "type": "module",

@@ -14,6 +14,33 @@ A tool to detect and clean unused styles in your React Native projects.
 - Supports array-style declarations
 - Beautiful CLI output with detailed information
 - TypeScript support
+- Style usage statistics and analysis
+- Duplicate style detection
+- Style complexity analysis
+- Performance impact analysis
+- Interactive cleaning mode
+
+## Available Commands 📋
+
+| Command       | Description                               | Example                                      | Output                                     |
+| ------------- | ----------------------------------------- | -------------------------------------------- | ------------------------------------------ |
+| `clean`       | Removes unused styles from your project   | `npx react-native-style-cleaner clean ./src` | List of removed styles                     |
+| `analyze`     | Shows unused styles without removing them | `npx react-native-style-cleaner analyze`     | List of unused styles                      |
+| `stats`       | Displays style usage statistics           | `npx react-native-style-cleaner stats`       | Usage counts, most/least used styles       |
+| `duplicates`  | Finds duplicate style definitions         | `npx react-native-style-cleaner duplicates`  | List of duplicate styles with locations    |
+| `complexity`  | Analyzes style complexity                 | `npx react-native-style-cleaner complexity`  | Complex styles that might need refactoring |
+| `performance` | Checks performance impact of styles       | `npx react-native-style-cleaner performance` | Heavy styles with optimization suggestions |
+| `interactive` | Clean styles with confirmation            | `npx react-native-style-cleaner interactive` | Interactive prompts for each style         |
+| `help`        | Shows all available commands              | `npx react-native-style-cleaner help`        | List of all commands and usage             |
+
+### Command Options
+
+| Option      | Description              | Example                                               |
+| ----------- | ------------------------ | ----------------------------------------------------- |
+| `--dir`     | Specify custom directory | `npx react-native-style-cleaner clean --dir=./app`    |
+| `--ignore`  | Ignore specific paths    | `npx react-native-style-cleaner clean --ignore=tests` |
+| `--verbose` | Show detailed output     | `npx react-native-style-cleaner analyze --verbose`    |
+| `--json`    | Output results as JSON   | `npx react-native-style-cleaner stats --json`         |
 
 ## Installation 📦
 
@@ -62,19 +89,7 @@ By default, the following directories are ignored:
 
 ## Contributing 🤝
 
-Contributions, issues and feature requests are welcome! Feel free to check [issues page](https://github.com/muhammeddeniz/react-native-style-cleaner/issues).
-
-### Development Setup
-
-```bash
-git clone https://github.com/muhammeddeniz/react-native-style-cleaner.git
-cd react-native-style-cleaner
-npm install
-```
-
-## Support 💪
-
-Give a ⭐️ if this project helped you!
+Contributions, issues and feature requests are welcome!
 
 ## License 📝
 
@@ -93,16 +108,15 @@ Give a ⭐️ if this project helped you!
 
 ## Changelog 📝
 
-### Version 1.0.0
+### Version 1.2.1
 
-- Initial release
-- Basic style detection and cleaning
-- CLI interface with colored output
-
-### Version 1.1.0
-
-- Added TypeScript support
-- Improved error handling
-- Better CLI output formatting
-
----
+- Added new analysis features:
+  - `stats`: Style usage statistics
+  - `duplicates`: Find duplicate styles
+  - `complexity`: Style complexity analysis
+  - `performance`: Performance impact analysis
+  - `interactive`: Interactive cleaning mode
+- Enhanced CLI with new commands
+- Improved error handling and reporting
+- Added detailed statistics output
+- Added colorful CLI interface

@@ -16,6 +16,7 @@ class StyleCleaner {
     this.usedStyles = new Set();
     this.definedStyles = new Map();
     this.totalFiles = 0;
+    this.styleUsageCount = new Map(); // Her stilin kaç kez kullanıldığını takip eder
   }
 
   getTotalFiles() {
@@ -160,6 +161,112 @@ class StyleCleaner {
       console.error(`Error removing style ${styleName}:`, error);
       return content;
     }
+  }
+
+  analyzeUsageStatistics() {
+    const stats = {
+      mostUsed: [],
+      leastUsed: [],
+      unusedCount: 0,
+      totalStyles: this.definedStyles.size,
+      totalUsages: 0,
+    };
+
+    // İstatistikleri hesapla
+    return stats;
+  }
+
+  findDuplicateStyles() {
+    const duplicates = new Map();
+    const styleValues = new Map();
+
+    this.definedStyles.forEach((value, styleName) => {
+      const styleContent = JSON.stringify(value.style);
+      if (styleValues.has(styleContent)) {
+        // Aynı içeriğe sahip stiller bulundu
+        const existing = styleValues.get(styleContent);
+        duplicates.set(styleName, {
+          duplicate: existing,
+          filePath: value.filePath,
+        });
+      } else {
+        styleValues.set(styleContent, styleName);
+      }
+    });
+
+    return duplicates;
+  }
+
+  analyzeStyleComplexity() {
+    const complexStyles = [];
+
+    this.definedStyles.forEach((value, styleName) => {
+      const complexity = this.calculateStyleComplexity(value.style);
+      if (complexity > COMPLEXITY_THRESHOLD) {
+        complexStyles.push({
+          styleName,
+          complexity,
+          filePath: value.filePath,
+        });
+      }
+    });
+
+    return complexStyles;
+  }
+
+  suggestStyleMigrations() {
+    // Yaygın kullanılan stilleri ortak bir dosyaya taşıma önerileri
+    const suggestions = [];
+    const commonStyles = this.findCommonStyles();
+
+    // Öneriler oluştur
+    return suggestions;
+  }
+
+  async cleanInteractive() {
+    const unusedStyles = await this.analyze();
+
+    for (const style of unusedStyles) {
+      const answer = await this.promptUser(
+        `Remove unused style "${style.styleName}" in ${style.filePath}? (y/n)`
+      );
+
+      if (answer.toLowerCase() === "y") {
+        await this.removeStyle(style);
+      }
+    }
+  }
+
+  backupStyles(filePath) {
+    const backup = {
+      timestamp: new Date(),
+      styles: {},
+      filePath,
+    };
+
+    // Stilleri yedekle
+    return backup;
+  }
+
+  restoreStyles(backup) {
+    // Yedekten geri yükle
+  }
+
+  analyzePerformanceImpact() {
+    const heavyStyles = [];
+
+    this.definedStyles.forEach((value, styleName) => {
+      const impact = this.calculatePerformanceImpact(value.style);
+      if (impact > PERFORMANCE_THRESHOLD) {
+        heavyStyles.push({
+          styleName,
+          impact,
+          suggestion: this.generateOptimizationSuggestion(value.style),
+        });
+      }
+    });
+
+    return heavyStyles;
   }
 }
 
