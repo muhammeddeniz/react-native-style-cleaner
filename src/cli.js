@@ -24,33 +24,33 @@ async function run() {
   try {
     printHeader("🧹 React Native Style Cleaner");
 
-    console.log(chalk.cyan("📂 Taranan dizin:"), chalk.white(srcPath));
+    console.log(chalk.cyan("📂 Scanned directory:"), chalk.white(srcPath));
 
     const cleaner = new StyleCleaner(srcPath);
 
-    console.log(chalk.cyan("\n🔍 Analiz yapılıyor..."));
+    console.log(chalk.cyan("\n🔍 Analyzing..."));
     const unusedStyles = await cleaner.analyze();
 
     if (unusedStyles.length === 0) {
-      console.log(chalk.green("\n✨ Harika! Kullanılmayan stil bulunamadı."));
+      console.log(chalk.green("\n✨ Great! No unused styles found."));
       return;
     }
 
-    printHeader(`🗑️  Kullanılmayan Stiller (${unusedStyles.length})`);
+    printHeader(`🗑️  Unused Styles (${unusedStyles.length})`);
     printStyleInfo(unusedStyles);
 
-    const totalFiles = cleaner.getTotalFiles(); // Bu metodu index.js'e eklememiz gerekecek
-    console.log(chalk.dim(`\n📊 Toplam taranan dosya: ${totalFiles}`));
+    const totalFiles = cleaner.getTotalFiles();
+    console.log(chalk.dim(`\n📊 Total files scanned: ${totalFiles}`));
 
-    console.log(chalk.cyan("\n🧹 Temizleme işlemi başlıyor..."));
+    console.log(chalk.cyan("\n🧹 Starting cleanup process..."));
     const cleanedStyles = await cleaner.clean();
 
-    printHeader(`✅ Temizlenen Stiller (${cleanedStyles.length})`);
+    printHeader(`✅ Cleaned Styles (${cleanedStyles.length})`);
     printStyleInfo(cleanedStyles);
 
-    console.log(chalk.green("\n✨ İşlem başarıyla tamamlandı!"));
+    console.log(chalk.green("\n✨ Process completed successfully!"));
   } catch (error) {
-    console.error(chalk.red("\n❌ Bir hata oluştu:"), error);
+    console.error(chalk.red("\n❌ An error occurred:"), error);
     process.exit(1);
   }
 }
